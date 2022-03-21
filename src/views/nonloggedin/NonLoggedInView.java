@@ -59,7 +59,8 @@ public class NonLoggedInView extends View {
 
     private void signIn() {
         final SignInDTO dto = generateSignInDTO();
-        Optional<User> optionalUser = userRepository.findById(dto.getId());
+        Optional<User> optionalUser = userRepository
+                .findById(dto.getId(), (id, user) -> user.getId().equals(id));
 
         setLoggedInState(
                 validationUser(optionalUser, dto.getPassword())

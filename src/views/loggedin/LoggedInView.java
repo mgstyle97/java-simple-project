@@ -4,8 +4,6 @@ import views.View;
 
 public class LoggedInView extends View {
 
-
-
     @Override
     public void printPage() {
 

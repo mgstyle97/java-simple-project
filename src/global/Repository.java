@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.BiPredicate;
 
 public class Repository<T extends Entity> {
 
@@ -19,18 +20,11 @@ public class Repository<T extends Entity> {
         this.collection.put(entity.getUuid(), entity);
     }
 
-    public Optional<T> findById(final String id) {
+    public Optional<T> findById(final String id, final BiPredicate<String, T> predicate) {
 
-        try {
-            final UUID uuid = uuidCollection.get(id);
-
-            return Optional.of(
-                    collection.get(uuid)
-            );
-        } catch (NullPointerException e) {
-            System.err.println("잘못된 요청입니다.");
-            return Optional.empty();
-        }
+        return collection.values().stream()
+                .filter(entity -> predicate.test(id, entity))
+                .findFirst();
     }
 
 }
