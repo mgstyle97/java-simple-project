@@ -1,4 +1,4 @@
-package views.managecart;
+package views.purchasableview.managecart;
 
 import product.Product;
 import views.purchasableview.PurchasableView;

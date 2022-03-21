@@ -2,11 +2,11 @@ package views;
 
 import views.filter.AuthorizedFilter;
 import views.loggedin.LoggedInView;
-import views.managecart.ManageCartView;
+import views.purchasableview.managecart.ManageCartView;
 import views.managepurchasedProduct.ManagePurchasedProductView;
 import views.nonloggedin.NonLoggedInView;
 import views.manageregisterproduct.ManageRegisterProductView;
-import views.productlist.ProductListView;
+import views.purchasableview.productlist.ProductListView;
 import views.registerproduct.RegisterProductView;
 
 public class ViewFactory {

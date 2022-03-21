@@ -1,10 +1,7 @@
-package views.productlist;
+package views.purchasableview.productlist;
 
 import product.Product;
-import user.User;
-import views.Purchasable;
 import views.Storeable;
-import views.View;
 import views.loggedin.mapper.CommandCategoryMapper;
 import views.purchasableview.PurchasableView;
 
