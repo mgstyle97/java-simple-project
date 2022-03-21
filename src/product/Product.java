@@ -1,7 +1,8 @@
 package product;
 
-import global.Entity;
-import user.Money;
+import global.data.Entity;
+import global.properties.Money;
+import views.registerproduct.dto.UpdateProductDTO;
 
 public class Product extends Entity {
 
@@ -12,10 +13,15 @@ public class Product extends Entity {
 
     public Product(final String name, final String description,
                    final String category, final long price) {
+        this(name, description, Category.of(category), Money.of(price));
+    }
+
+    public Product(final String name, final String description,
+                   final Category category, final Money price) {
         this.name = name;
         this.description = description;
-        this.category = Category.of(category);
-        this.price = Money.of(price);
+        this.category = category;
+        this.price = price;
     }
 
     public void setName(final String name) {
@@ -50,6 +56,13 @@ public class Product extends Entity {
         return this.price;
     }
 
+    public void update(final UpdateProductDTO dto) {
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.category = dto.getCategory();
+        this.price = Money.of(dto.getPrice());
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("-----------------------------------\n");
@@ -61,12 +74,6 @@ public class Product extends Entity {
         return builder.toString();
     }
 
-    enum Category {
-        DIGITAL_MACHINE, FOOD, CLOTHES, BEDDING;
 
-        static Category of(final String categoryString) {
-            return Category.valueOf(categoryString.toUpperCase());
-        }
-    }
 
 }

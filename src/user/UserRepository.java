@@ -1,6 +1,6 @@
 package user;
 
-import global.Repository;
+import global.data.Repository;
 
 public class UserRepository extends Repository<User> {
 

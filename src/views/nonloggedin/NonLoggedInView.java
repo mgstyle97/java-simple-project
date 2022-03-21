@@ -11,19 +11,19 @@ import java.util.Optional;
 
 public class NonLoggedInView extends View {
 
-    private final UserRepository userRepository;
-
-    public NonLoggedInView() {
-        this.userRepository = new UserRepository();
-    }
-
     @Override
     public void printPage() {
-        System.out.println();
-        System.out.println("-------------------------------------");
-        System.out.println("1. 회원가입\t 2. 로그인\t 3. 종료");
-        System.out.print(">> ");
-        handleRequest(Integer.valueOf(scanner.nextLine()));
+        try {
+            System.out.println();
+            System.out.println("-------------------------------------");
+            System.out.println("1. 회원가입\t 2. 로그인\t 3. 종료");
+            System.out.print(">> ");
+            handleRequest(inputCommand());
+        } catch (NumberFormatException e) {
+            System.err.println("표시된 숫자를 입력해야 합니다.");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package global;
+package global.data;
 
 import java.util.UUID;
 

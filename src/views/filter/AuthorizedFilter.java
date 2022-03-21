@@ -11,9 +11,7 @@ public class AuthorizedFilter extends AbstractFilter {
 
     @Override
     protected void preHandle() {
-        if (!View.state.equals(ViewState.Logged_In) ||
-                View.user == null
-        ) {
+        if (View.user == null) {
             throw new AuthorizedException();
         }
     }

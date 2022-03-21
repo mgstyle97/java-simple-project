@@ -1,4 +1,4 @@
-package global;
+package global.data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.function.BiPredicate;
 
 public class Repository<T extends Entity> {
 
-    private final Map<UUID, T> collection;
+    protected final Map<UUID, T> collection;
     private final Map<String, UUID> uuidCollection;
 
     public Repository() {
@@ -25,6 +25,14 @@ public class Repository<T extends Entity> {
         return collection.values().stream()
                 .filter(entity -> predicate.test(id, entity))
                 .findFirst();
+    }
+
+    public void update(T entity) {
+
+    }
+
+    public void delete(final T entity) {
+        this.collection.remove(entity.getUuid(), entity);
     }
 
 }

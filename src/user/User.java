@@ -1,8 +1,8 @@
 package user;
 
-import global.Entity;
-
-import java.util.UUID;
+import global.data.Entity;
+import global.properties.Money;
+import product.Product;
 
 public class User extends Entity {
 
@@ -42,8 +42,20 @@ public class User extends Entity {
         return this.nick;
     }
 
+    public Money getBalance() {
+        return this.balance;
+    }
+
     public boolean checkPassword(final String confirmPassword) {
         return this.password.equals(confirmPassword);
+    }
+
+    public void addBalance(final Money price) {
+        this.balance = this.balance.add(price);
+    }
+
+    public void minusBalance(final Money price) {
+        this.balance = this.balance.minus(price);
     }
 
 }
