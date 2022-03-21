@@ -23,7 +23,7 @@ public class NonLoggedInView extends View {
         System.out.println("-------------------------------------");
         System.out.println("1. 회원가입\t 2. 로그인\t 3. 종료");
         System.out.print(">> ");
-        handleRequest(scanner.nextInt());
+        handleRequest(Integer.valueOf(scanner.nextLine()));
     }
 
     @Override
@@ -32,17 +32,21 @@ public class NonLoggedInView extends View {
             switch (command) {
                 case 1: {
                     signUp();
+                    break;
                 }
                 case 2: {
                     signIn();
+                    break;
                 }
                 case 3:
                     exit();
+                    break;
                 default:
                     throw new IllegalArgumentException("잘못된 요청입니다.");
             }
         } catch (RuntimeException e) {
             System.err.println(e.getMessage());
+            System.out.println();
         }
     }
 
@@ -81,17 +85,19 @@ public class NonLoggedInView extends View {
     }
 
     private SignInDTO generateSignInDTO() {
-        System.out.print("아이디 >>");
+        System.out.print("아이디 >> ");
         final String id = scanner.nextLine();
 
-        System.out.print("비밀번호 >>");
+        System.out.print("비밀번호 >> ");
         final String password = scanner.nextLine();
 
         return new SignInDTO(id, password);
     }
 
     private User validationUser(final Optional<User> optionalUser, final String confirmPassword) {
-        final User user = optionalUser.orElseThrow(IllegalArgumentException::new);
+        final User user = optionalUser.orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 아이디입니다.")
+        );
         if (!user.checkPassword(confirmPassword)) {
             throw new IllegalArgumentException("올바르지 않은 패스워드입니다.");
         }
