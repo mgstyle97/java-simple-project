@@ -38,7 +38,6 @@ public class ManageRegisterProductView extends View {
                 removeProduct();
                 break;
             case 3:
-                state = ViewState.Logged_In;
                 break;
             default:
                 throw new IllegalArgumentException("잘못된 요청입니다.");
@@ -95,8 +94,6 @@ public class ManageRegisterProductView extends View {
             default:
                 throw new IllegalArgumentException("잘못된 요청입니다.");
         }
-
-        state = ViewState.Logged_In;
     }
 
     private void removeProductOnRepository(final Product product) {

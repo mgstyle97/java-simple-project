@@ -39,8 +39,6 @@ public class ManageCartView extends PurchasableView {
             default:
                 throw new IllegalArgumentException("잘못된 요청입니다.");
         }
-
-        state = ViewState.Logged_In;
     }
 
     private void removeStoreProduct() {
