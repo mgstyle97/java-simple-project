@@ -39,7 +39,7 @@ public class ProductListView extends PurchasableView {
     }
 
     private List<Product> findByCategory(final Category category) {
-        final List<Product> products = productRepository.findByCategory(category);
+        final List<Product> products = PRODUCT_REPOSITORY.findByCategory(category);
         if (products.size() == 0) {
             throw new IllegalArgumentException("해당 카테고리에 등록된 상품이 존재하지 않습니다.");
         }
@@ -82,7 +82,7 @@ public class ProductListView extends PurchasableView {
         System.out.println("-------------------------------------");
         System.out.println("장바구니에 담을 상품의 이름을 입력해주세요.");
         System.out.print(">> ");
-        Optional<Product> purchaseProduct = productRepository
+        Optional<Product> purchaseProduct = PRODUCT_REPOSITORY
                 .findById(scanner.nextLine(), (name, product) -> product.getName().equals(name));
         store(purchaseProduct.orElseThrow(
                 () -> new IllegalArgumentException("해당 이름의 상품이 존재하지 않습니다.")
@@ -90,7 +90,7 @@ public class ProductListView extends PurchasableView {
     }
 
     private void store(final Product product) {
-        productRepository.saveStoreProduct(user.getId(), product);
+        PRODUCT_REPOSITORY.saveStoreProduct(user.getId(), product);
     }
 
 }

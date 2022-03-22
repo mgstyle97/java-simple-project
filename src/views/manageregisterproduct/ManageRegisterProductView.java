@@ -13,7 +13,7 @@ public class ManageRegisterProductView extends View {
     @Override
     public void printPage() {
         try {
-            final List<Product> userRegisterProduct = productRepository.findRegisterProductByUserId(user.getId());
+            final List<Product> userRegisterProduct = PRODUCT_REPOSITORY.findRegisterProductByUserId(user.getId());
             userRegisterProduct.forEach(System.out::println);
 
             System.out.println();
@@ -56,7 +56,7 @@ public class ManageRegisterProductView extends View {
         final UpdateProductDTO dto = generateUpdateProductDTO();
         if (dto != null) product.update(dto);
 
-        productRepository.update(product);
+        PRODUCT_REPOSITORY.update(product);
 
     }
 
@@ -97,11 +97,11 @@ public class ManageRegisterProductView extends View {
     }
 
     private void removeProductOnRepository(final Product product) {
-        productRepository.removeRegisterProduct(user.getId(), product);
+        PRODUCT_REPOSITORY.removeRegisterProduct(user.getId(), product);
     }
 
     private Product findByProductName(final String productName) {
-        return productRepository.findRegisterProductByUserId(user.getId())
+        return PRODUCT_REPOSITORY.findRegisterProductByUserId(user.getId())
                 .stream()
                 .filter(product1 -> product1.getName().equals(productName))
                 .findFirst()

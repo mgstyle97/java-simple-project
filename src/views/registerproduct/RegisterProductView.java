@@ -48,7 +48,7 @@ public class RegisterProductView extends View {
                     name, price, description, category
             );
 
-            productRepository.saveRegisterProduct(user.getId(), new Product(
+            PRODUCT_REPOSITORY.saveRegisterProduct(user.getId(), new Product(
                     dto.getName(), dto.getDescription(),
                     dto.getCategory(), Money.of(dto.getPrice())
             ));

@@ -2,7 +2,6 @@ package views.nonloggedin;
 
 
 import user.User;
-import user.UserRepository;
 import views.View;
 import views.nonloggedin.dto.SignInDTO;
 import views.nonloggedin.dto.SignUpDTO;
@@ -52,7 +51,7 @@ public class NonLoggedInView extends View {
 
     private void signUp() {
         final SignUpDTO dto = generateSignUpDTO();
-        userRepository.save(
+        USER_REPOSITORY.save(
                 new User(
                         dto.getId(),
                         dto.getPassword(),
@@ -63,7 +62,7 @@ public class NonLoggedInView extends View {
 
     private void signIn() {
         final SignInDTO dto = generateSignInDTO();
-        Optional<User> optionalUser = userRepository
+        Optional<User> optionalUser = USER_REPOSITORY
                 .findById(dto.getId(), (id, user) -> user.getId().equals(id));
 
         setLoggedInState(

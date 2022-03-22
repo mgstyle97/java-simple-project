@@ -12,13 +12,13 @@ public abstract class View {
     public static User user;
 
     protected Scanner scanner;
-    protected static final UserRepository userRepository;
-    protected static final ProductRepository productRepository;
+    protected static final UserRepository USER_REPOSITORY;
+    protected static final ProductRepository PRODUCT_REPOSITORY;
 
     static {
         state = ViewState.Non_Logged_In;
-        userRepository = new UserRepository();
-        productRepository = new ProductRepository();
+        USER_REPOSITORY = new UserRepository();
+        PRODUCT_REPOSITORY = new ProductRepository();
     }
 
     public View() {

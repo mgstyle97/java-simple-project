@@ -10,7 +10,7 @@ public class ManageCartView extends PurchasableView {
     @Override
     public void printPage() {
         try {
-            final List<Product> userStoreProducts = productRepository.findStoreProductByUserId(user.getId());
+            final List<Product> userStoreProducts = PRODUCT_REPOSITORY.findStoreProductByUserId(user.getId());
             userStoreProducts.forEach(System.out::println);
 
             System.out.println();
@@ -50,11 +50,11 @@ public class ManageCartView extends PurchasableView {
         final String productName = scanner.nextLine();
         final Product product = findByProductName(productName);
 
-        productRepository.removeStoreProduct(user.getId(), product);
+        PRODUCT_REPOSITORY.removeStoreProduct(user.getId(), product);
     }
 
     private Product findByProductName(final String productName) {
-        return productRepository.findStoreProductByUserId(user.getId()).stream()
+        return PRODUCT_REPOSITORY.findStoreProductByUserId(user.getId()).stream()
                 .filter(product -> product.getName().equals(productName))
                 .findFirst()
                 .orElseThrow(

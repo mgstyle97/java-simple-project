@@ -11,7 +11,7 @@ public class ManagePurchasedProductView extends View {
     @Override
     public void printPage() {
         try {
-            final List<Product> userPurchasedProduct = productRepository.findPurchaseProductByUserId(user.getId());
+            final List<Product> userPurchasedProduct = PRODUCT_REPOSITORY.findPurchaseProductByUserId(user.getId());
             userPurchasedProduct.forEach(System.out::println);
 
             System.out.println();
@@ -55,7 +55,7 @@ public class ManagePurchasedProductView extends View {
     }
 
     private Product findByProductName(final String productName) {
-        return productRepository.findPurchaseProductByUserId(user.getId()).stream()
+        return PRODUCT_REPOSITORY.findPurchaseProductByUserId(user.getId()).stream()
                 .filter(product -> product.getName().equals(productName))
                 .findFirst()
                 .orElseThrow(
@@ -64,9 +64,9 @@ public class ManagePurchasedProductView extends View {
     }
 
     private void refundForPurchasedProduct(final Product purchasedProduct) {
-        final User seller = userRepository
+        final User seller = USER_REPOSITORY
                 .findById(
-                        productRepository.findSellerIdByProduct(purchasedProduct),
+                        PRODUCT_REPOSITORY.findSellerIdByProduct(purchasedProduct),
                         (userId, user) -> user.getId().equals(userId)
                 ).orElseThrow(
                         () -> new IllegalArgumentException("존재하지 않는 회원입니다.")
@@ -75,6 +75,6 @@ public class ManagePurchasedProductView extends View {
         seller.minusBalance(purchasedProduct.getPrice());
         user.addBalance(purchasedProduct.getPrice());
 
-        productRepository.removePurchaseProduct(user.getId(), purchasedProduct);
+        PRODUCT_REPOSITORY.removePurchaseProduct(user.getId(), purchasedProduct);
     }
 }
