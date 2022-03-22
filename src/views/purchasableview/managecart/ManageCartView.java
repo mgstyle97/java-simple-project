@@ -22,7 +22,7 @@ public class ManageCartView extends PurchasableView {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
-
+        state = ViewState.Logged_In;
     }
 
     @Override
@@ -47,6 +47,7 @@ public class ManageCartView extends PurchasableView {
         System.out.println();
         System.out.println("-------------------------------------");
         System.out.println("삭제할 상품의 이름을 입력해주새요.");
+        System.out.print(">> ");
 
         final String productName = scanner.nextLine();
         final Product product = findByProductName(productName);

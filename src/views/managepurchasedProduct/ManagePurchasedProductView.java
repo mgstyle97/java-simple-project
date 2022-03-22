@@ -25,6 +25,7 @@ public class ManagePurchasedProductView extends View {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
+        state = ViewState.Logged_In;
     }
 
     @Override

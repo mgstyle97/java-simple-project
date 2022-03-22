@@ -15,7 +15,7 @@ public class ProductListView extends PurchasableView implements Storeable {
         try {
             System.out.println();
             System.out.println("-------------------------------------");
-            System.out.println("1. 전자기기\t 2. 음식\t 3. 옷\t 4. 침구류");
+            System.out.println("1. 전자기기\t 2. 음식\t 3. 옷\t 4. 침구류\t 5. 나가기");
             System.out.print(">> ");
             handleRequest(inputCommand());
         } catch (NumberFormatException e) {
@@ -23,10 +23,16 @@ public class ProductListView extends PurchasableView implements Storeable {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
+        state = ViewState.Logged_In;
     }
 
     @Override
     protected void handleRequest(Integer command) {
+        if (command.equals(5)) {
+            state = ViewState.Logged_In;
+            return;
+        }
+
         List<Product> products = productRepository
                 .findByCategory(
                         CommandCategoryMapper.map(command)

@@ -1,7 +1,6 @@
 package product;
 
 import global.data.Repository;
-import user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
