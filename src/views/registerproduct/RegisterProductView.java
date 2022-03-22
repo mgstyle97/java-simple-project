@@ -29,7 +29,6 @@ public class RegisterProductView extends View {
     @Override
     protected void handleRequest(Integer command) {
         if (command.equals(5)) {
-            state = ViewState.Logged_In;
             return;
         }
 
@@ -56,7 +55,5 @@ public class RegisterProductView extends View {
         } catch (NumberFormatException e) {
             System.err.println("숫자를 입력해야 합니다.");
         }
-
-        state = ViewState.Logged_In;
     }
 }

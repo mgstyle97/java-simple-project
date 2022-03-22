@@ -1,5 +1,6 @@
 package views.purchasableview.productlist;
 
+import product.Category;
 import product.Product;
 import views.Storeable;
 import views.loggedin.mapper.CommandCategoryMapper;
@@ -29,20 +30,25 @@ public class ProductListView extends PurchasableView implements Storeable {
     @Override
     protected void handleRequest(Integer command) {
         if (command.equals(5)) {
-            state = ViewState.Logged_In;
             return;
         }
 
-        List<Product> products = productRepository
-                .findByCategory(
-                        CommandCategoryMapper.map(command)
-                );
+        List<Product> products = findByCategory(CommandCategoryMapper.map(command));
         products.forEach(System.out::println);
-        additionalRequest();
 
+        handlePurchaseOrStoreRequest();
     }
 
-    private void additionalRequest() {
+    private List<Product> findByCategory(final Category category) {
+        final List<Product> products = productRepository.findByCategory(category);
+        if (products.size() == 0) {
+            throw new IllegalArgumentException("해당 카테고리에 등록된 상품이 존재하지 않습니다.");
+        }
+
+        return products;
+    }
+
+    private void handlePurchaseOrStoreRequest() {
         try {
             System.out.println();
             System.out.println("-------------------------------------");
@@ -70,8 +76,6 @@ public class ProductListView extends PurchasableView implements Storeable {
             default:
                 throw new IllegalArgumentException("잘못된 요청입니다.");
         }
-
-        state = ViewState.Logged_In;
     }
 
     private void storeProduct() {
