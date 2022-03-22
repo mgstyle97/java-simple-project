@@ -2,14 +2,13 @@ package views.purchasableview.productlist;
 
 import product.Category;
 import product.Product;
-import views.Storeable;
 import views.loggedin.mapper.CommandCategoryMapper;
 import views.purchasableview.PurchasableView;
 
 import java.util.List;
 import java.util.Optional;
 
-public class ProductListView extends PurchasableView implements Storeable {
+public class ProductListView extends PurchasableView {
 
     @Override
     public void printPage() {
@@ -90,8 +89,7 @@ public class ProductListView extends PurchasableView implements Storeable {
         ));
     }
 
-    @Override
-    public void store(Product product) {
+    private void store(final Product product) {
         productRepository.saveStoreProduct(user.getId(), product);
     }
 
