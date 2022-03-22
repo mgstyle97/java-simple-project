@@ -35,7 +35,6 @@ public class ManagePurchasedProductView extends View {
                 handleRefundRequest();
                 break;
             case 2:
-                state = ViewState.Logged_In;
                 break;
             default:
                 throw new IllegalArgumentException("잘못된 요청입니다.");
