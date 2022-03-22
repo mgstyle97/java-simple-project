@@ -77,17 +77,17 @@ public class ProductRepository extends Repository<Product> {
     public List<Product> findRegisterProductByUserId(final String userId) {
         final List<Product> userRegisterProducts = this.userRegisterProductCollection.get(userId);
 
-        if (userRegisterProducts == null) {
+        if (userRegisterProducts == null || userRegisterProducts.size() == 0) {
             throw new IllegalArgumentException("등록한 상품에 대한 정보가 없습니다.");
         }
 
         return userRegisterProducts;
     }
 
-    public List<Product> findPurchaseProductByUserId(final String userId) {
+    public List<Product>    findPurchaseProductByUserId(final String userId) {
         final List<Product> userPurchaseProducts = this.userPurchaseProductCollection.get(userId);
 
-        if (userPurchaseProducts == null) {
+        if (userPurchaseProducts == null || userPurchaseProducts.size() == 0) {
             throw new IllegalArgumentException("구매한 상품들에 대한 정보가 없습니다.");
         }
 
@@ -97,7 +97,7 @@ public class ProductRepository extends Repository<Product> {
     public List<Product> findStoreProductByUserId(final String userId) {
         final List<Product> userStoreProducts = this.userStoreProductCollection.get(userId);
 
-        if (userStoreProducts == null) {
+        if (userStoreProducts == null || userStoreProducts.size() == 0) {
             throw new IllegalArgumentException("장바구니에 담긴 상품이 없습니다.");
         }
 
